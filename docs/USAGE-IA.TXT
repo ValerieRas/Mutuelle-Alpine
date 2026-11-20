@@ -116,14 +116,14 @@ VÉRIFICATION : Codex a relu ingestion/producer.py et docker-compose.yml pour v�
              Relance de Sabrina : expliquer source, partition et offset. Codex a vérifié les champs attendus dans le gabarit du consommateur L1 et illustré leur signification par une position fictive dans le topic.
 TEMPS      : Délai IA non chronométré. Relecture et estimation du temps gagné ou perdu en attente.
 --------------------------------------------------------------------------------
- #ID        : 007
+#ID        : 007
 DATE       : 2026-11-20
 AUTEUR     : Sabrina
 LOT TP     : L1 — Piste IA du consommateur Kafka
 OUTIL      : Codex et agent chargé de proposer une ébauche
 POURQUOI   : Vérifier le comportement du consommateur déjà intégré avec la PR #5 et reproduire les cas de panne et de rejeu du cahier de TP.
 DEMANDE    : Examiner l’avancement de L1, créer une branche, faire proposer une ébauche du consommateur, vérifier commit, arrêt propre et idempotence et consigner les corrections. Relance de Sabrina sur le topic créé par Valérie et la possibilité de le récupérer sur son Mac.
-RÉSULTAT   : Branche feature/l1-piste-ia-consommateur, corrections et preuves dans docs/piste-ia-consommateur.md. Validation de Sabrina en attente. Le code de Valérie est intégré à main. Le broker de Sabrina et celui de Valérie sont distincts.
+RÉSULTAT   : ACCEPTÉ APRÈS CORRECTION — PR créée : #6. Sabrina a validé le livrable et demandé le push et la création de la PR vers main. Branche feature/l1-piste-ia-consommateur, corrections et preuves dans docs/piste-ia-consommateur.md. Le code de Valérie est intégré à main. Le broker de Sabrina et celui de Valérie sont distincts.
 CE QUI A ÉTÉ REFUSÉ / CORRIGÉ : La boucle existante imputait la durée totale du programme à la perte d’attribution. À 60 s de fonctionnement, une seule lecture vide sans partition provoquait une erreur immédiate. L’ébauche ciblée de l’agent a été adaptée pour mesurer chaque période sans attribution, démarrer le délai d’inactivité à la réattribution et honorer un arrêt demandé pendant une lecture vide. Les mécanismes de commit et d’idempotence existants ont été conservés après contrôle.
 VÉRIFICATION : Codex a relu le cahier de TP p. 3–4, les scripts, les tests et l’historique Git. Neuf tests passaient sur la base initiale. Trois nouveaux scénarios ont échoué avant la correction. Les quatorze tests du dépôt passent ensuite, y compris SIGINT, SIGTERM, rollback et commit partiel. Sur un topic temporaire à trois partitions et une base isolée : 12 080 événements écrits, zéro lu à la reprise, 12 080 relus pour zéro ajout au rejeu forcé. Lignes et horodatages identiques après rejeu. Topic de test supprimé. Contrôle séparé des quatre CSV : 4 000, 4 909, 120 et 2 841 lignes, zéro ajout au second chargement.
 TEMPS      : Environ 4 min 30 s mesurées jusqu’à la vérification des résultats. Suite de tests finale mesurée par pytest en 13,82 s (incluse). Temps de relecture et estimation du gain ou de la perte par Sabrina en attente.
