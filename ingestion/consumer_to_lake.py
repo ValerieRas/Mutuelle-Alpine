@@ -121,7 +121,7 @@ def consume_kafka(connection, args, stop):
         "auto.offset.reset": "earliest",
     })
     processed = 0
-    last_message = started = time.monotonic()
+    last_message = unassigned_since = time.monotonic()
     try:
         if args.from_beginning:
             def on_assign(client, partitions):
@@ -138,13 +138,20 @@ def consume_kafka(connection, args, stop):
                 write_kafka_batch(connection, consumer, messages)
                 processed += len(messages)
                 last_message = time.monotonic()
+                unassigned_since = None
+            elif stop.is_set():
+                break
             elif consumer.assignment():
+                if unassigned_since is not None:
+                    last_message = now
+                    unassigned_since = None
                 if args.idle_timeout and now - last_message >= args.idle_timeout:
                     break
             else:
                 # L'absence de broker ou d'attribution n'est pas une fin réussie.
-                last_message = now
-                if now - started >= 30:
+                if unassigned_since is None:
+                    unassigned_since = now
+                if now - unassigned_since >= 30:
                     raise RuntimeError("Aucune partition attribuée après 30 s ; vérifier Kafka et le topic.")
     finally:
         # L'auto-commit est désactivé : close() ne confirme aucun lot non écrit.
