@@ -5,6 +5,7 @@ Membres : BADIN-LÉGER Maxence, RASOLOFOARISON Valérie et Hammadi Sabrina
 ================================================================================
 RÈGLES
 - Une entrée par usage significatif (pas chaque autocomplétion).
+- Règle de l’équipe : à chaque appel à une IA, créer ou compléter une entrée selon AGENTS.md. Remplir tous les champs et demander au membre toute information manquante.
 - Être honnête : un journal qui ne mentionne aucun refus ni aucune correction n'est pas crédible.
 - Ne JAMAIS coller de données personnelles (même fictives de bronze.assures) dans un outil d'IA externe.
 
@@ -41,4 +42,18 @@ RÉSULTAT   : ACCEPTÉ APRÈS CORRECTION.
 CE QUI A ÉTÉ REFUSÉ / CORRIGÉ : Après relecture de l’exercice 4, j’ai demandé de réunir les deux diagrammes en un seul schéma et de garder les explications dans la conversation.
 VÉRIFICATION : Consigne relue dans le cahier de TP (p. 3). Le fichier docs/architecture.md contient un seul schéma présentant les flux, les couches, les outils et leurs utilisateurs.
 TEMPS      : Première réponse de Codex en 1 min 11 s. Temps gagné ou perdu par l’équipe : non estimé.
+--------------------------------------------------------------------------------
+#ID        : 002
+DATE       : 2026-11-20
+AUTEUR     : Sabrina
+LOT TP     : L0 — Cadrage du travail en équipe
+OUTIL      : Codex
+POURQUOI   : Permettre aux trois membres de partir des mêmes consignes et décisions lors de recherches séparées.
+DEMANDE    : Évaluer l’intérêt d’un contexte commun et de consignes pour les assistants, puis mettre à jour le README, créer CONTEXTE.md et AGENTS.md et formaliser le suivi de chaque appel IA.
+RÉSULTAT   : ACCEPTÉ APRÈS CORRECTION. Sabrina a retenu un README d’accueil, un contexte partagé et des consignes dédiées aux assistants.
+CE QUI A ÉTÉ REFUSÉ / CORRIGÉ : La proposition initiale plaçait le contexte dans le README. Sabrina a demandé un fichier de contexte distinct et une mise à jour du journal à chaque appel, avec une question au membre si une information manque.
+VÉRIFICATION : Codex a contrôlé les liens locaux du README, les consignes de journalisation et la présence de tous les champs de l’entrée 002.
+             Relance de Sabrina : retrouver les différences dans VS Code. Codex a comparé main au commit ab8be14, vérifié les quatre fichiers et ouvert le comparatif.
+             Correction demandée par Sabrina : couvrir le projet entier dans CONTEXTE.md et AGENTS.md. Codex a repris les lots L0 à L9, les livrables et les critères du cahier de TP et de la grille. Relecture de cette version par Sabrina en attente.
+TEMPS      : Pour la demande initiale, délai de réponse de l’IA indiqué par Sabrina : 23 s. Temps d’analyse estimé par Sabrina : 3 min. Sabrina ne peut pas estimer le temps gagné ou perdu.
 --------------------------------------------------------------------------------
