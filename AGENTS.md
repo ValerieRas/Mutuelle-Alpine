@@ -9,6 +9,19 @@ L’équipe construit un système d’aide à la revue des sinistres auto et hab
 3. Pour une question sur l’avancement, inspecter la branche active, le fichier concerné et ses résultats disponibles. Un gabarit, un schéma cible ou une valeur attendue du kit ne prouve pas que le traitement a réussi. Pour les décisions antérieures de l’équipe, consulter le dépôt et les entrées pertinentes du journal.
 4. Répondre en français et au niveau de la demande. Pour une question de cours, expliquer dans la conversation avec un exemple du cas MAA. Pour un livrable, respecter la consigne et le format attendus. Pour une vérification, indiquer le contrôle réalisé, le résultat observé et ce qui reste à valider.
 
+## Priorité des consignes et livrables
+
+- Les consignes explicites du cours et du cahier de TP priment sur les conventions de `AGENTS.md`, de `CONTEXTE.md` et du README : respecter le contenu, le format, la quantité et les chemins de livraison demandés.
+- Lorsqu’une question demande un livrable documentaire, créer le fichier dans `docs/`, sauf si le cours impose un autre emplacement. Y écrire la réponse finale et signaler son chemin dans la conversation.
+- Si l’énoncé donne un nom de fichier, utiliser exactement ce nom : pour L0, exercice 4, `docs/architecture.md` ; pour L0, exercice 5, `docs/succes.md`.
+- Si aucun nom n’est imposé, choisir un nom correspondant à l’intitulé de l’exercice, en minuscules, sans accents ni espaces, avec des tirets entre les mots et l’extension `.md` pour une réponse textuelle.
+
+## Git et branches
+
+- Ne pas créer de commit et ne pas effectuer de push. Garder les modifications locales pour leur relecture par l’équipe.
+- Nommer les nouvelles branches selon Git Flow : `feature/<sujet>` pour une évolution ou un exercice, `hotfix/<sujet>` pour une correction urgente de production, `release/<version>` pour préparer une livraison. Utiliser un sujet court en minuscules, sans accents ni espaces et séparé par des tirets, par exemple `feature/l0-e5-definition-succes`.
+- Respecter les branches de base du dépôt (`main` et `develop` si elle existe). Ne pas créer `develop`, renommer une branche existante ou restructurer le dépôt sans demande explicite.
+
 ## Points à vérifier selon le sujet
 
 - **Ingestion et qualité.** Distinguer l’événement reçu du sinistre métier. Vérifier la provenance et le rejeu en bronze, puis le grain, les doublons et les motifs de rejet en silver et gold.

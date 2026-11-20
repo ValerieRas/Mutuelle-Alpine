@@ -57,3 +57,15 @@ VÉRIFICATION : Codex a contrôlé les liens locaux du README, les consignes de 
              Correction demandée par Sabrina : couvrir le projet entier dans CONTEXTE.md et AGENTS.md. Codex a repris les lots L0 à L9, les livrables et les critères du cahier de TP et de la grille. Relecture de cette version par Sabrina en attente.
 TEMPS      : Pour la demande initiale, délai de réponse de l’IA indiqué par Sabrina : 23 s. Temps d’analyse estimé par Sabrina : 3 min. Sabrina ne peut pas estimer le temps gagné ou perdu.
 --------------------------------------------------------------------------------
+#ID        : 003
+DATE       : 2026-11-20
+AUTEUR     : Maxence
+LOT TP     : L0 — Consignes de travail et de livraison
+OUTIL      : Codex
+POURQUOI   : Formaliser les règles de livraison et éviter les commits et publications intermédiaires.
+DEMANDE    : Ajouter dans AGENTS.md l’interdiction de commit et de push, la création des livrables dans docs/, le nom imposé par le cours ou tiré de l’exercice, la priorité des consignes du cours et une convention Git Flow pour les branches.
+RÉSULTAT   : Consignes demandées appliquées localement ; relecture de Maxence en attente.
+CE QUI A ÉTÉ REFUSÉ / CORRIGÉ : La convention précédente proposée dans la conversation imposait lot et numéro d’exercice au nom des fichiers ; la présente règle utilise d’abord le nom de l’énoncé, sinon l’intitulé de l’exercice. Pour les nouvelles branches, feature/<sujet> remplace le préfixe docs/ comme convention Git Flow ; la branche active n’a pas été renommée sans demande.
+VÉRIFICATION : Codex a relu README.md, AGENTS.md et CONTEXTE.md, vérifié les exemples architecture.md et succes.md au regard de la consigne L0 fournie, puis contrôlé le diff avec git diff --check. Aucun commit ni push effectué.
+TEMPS      : Délai de réponse IA non mesuré ; temps de relecture de Maxence et gain ou perte de temps non communiqués, à compléter après son retour.
+--------------------------------------------------------------------------------
