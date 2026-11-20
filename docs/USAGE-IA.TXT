@@ -60,12 +60,24 @@ TEMPS      : Pour la demande initiale, délai de réponse de l’IA indiqué par
 #ID        : 003
 DATE       : 2026-11-20
 AUTEUR     : Maxence
-LOT TP     : L0 — Consignes de travail et de livraison
+LOT TP     : L0 — Revue et clarification des consignes d’AGENTS.md
 OUTIL      : Codex
 POURQUOI   : Formaliser les règles de livraison et éviter les commits et publications intermédiaires.
-DEMANDE    : Ajouter dans AGENTS.md l’interdiction de commit et de push, la création des livrables dans docs/, le nom imposé par le cours ou tiré de l’exercice, la priorité des consignes du cours et une convention Git Flow pour les branches.
-RÉSULTAT   : Consignes demandées appliquées localement ; relecture de Maxence en attente.
-CE QUI A ÉTÉ REFUSÉ / CORRIGÉ : La convention précédente proposée dans la conversation imposait lot et numéro d’exercice au nom des fichiers ; la présente règle utilise d’abord le nom de l’énoncé, sinon l’intitulé de l’exercice. Pour les nouvelles branches, feature/<sujet> remplace le préfixe docs/ comme convention Git Flow ; la branche active n’a pas été renommée sans demande.
-VÉRIFICATION : Codex a relu README.md, AGENTS.md et CONTEXTE.md, vérifié les exemples architecture.md et succes.md au regard de la consigne L0 fournie, puis contrôlé le diff avec git diff --check. Aucun commit ni push effectué.
-TEMPS      : Délai de réponse IA non mesuré ; temps de relecture de Maxence et gain ou perte de temps non communiqués, à compléter après son retour.
+DEMANDE    : Ajouter dans AGENTS.md l’interdiction de commit et de push, la création des livrables dans docs/, le nom imposé par le cours ou tiré de l’exercice, la priorité des consignes du cours et une convention Git Flow pour les branches. Relance : distinguer cet usage de l’exercice 5 et consigner les temps et les difficultés rencontrées lors du test sur un autre profil. Précision suivante de Maxence : perte de temps de 2 h sur l’agent pour cet usage.
+RÉSULTAT   : Consignes demandées appliquées localement ; Maxence indique les avoir relues. Décision d’acceptation non précisée.
+CE QUI A ÉTÉ REFUSÉ / CORRIGÉ : La convention précédente proposée dans la conversation imposait lot et numéro d’exercice au nom des fichiers ; la présente règle utilise d’abord le nom de l’énoncé, sinon l’intitulé de l’exercice. Pour les nouvelles branches, feature/<sujet> remplace le préfixe docs/ comme convention Git Flow ; la branche active n’a pas été renommée sans demande. Maxence signale que les consignes étaient encore peu claires pour tester sur un autre profil, ce qui lui a fait perdre du temps.
+VÉRIFICATION : Codex a relu README.md, AGENTS.md et CONTEXTE.md, vérifié les exemples architecture.md et succes.md au regard de la consigne L0 fournie, puis contrôlé le diff avec git diff --check. Maxence déclare environ 15 min de relecture et rapporte des difficultés lors du test sur un autre profil. Aucun commit ni push effectué.
+TEMPS      : Temps d’exécution IA estimé par Maxence : environ 30 min. Temps de relecture estimé par Maxence : 15 min. Perte de temps déclarée par Maxence : 2 h sur l’agent, liée aux consignes d’AGENTS.md encore peu claires lors du test sur un autre profil. Les durées restent séparées et ne constituent pas une mesure du temps perdu.
+--------------------------------------------------------------------------------
+#ID        : 004
+DATE       : 2026-11-20
+AUTEUR     : Maxence
+LOT TP     : L0 — Exercice 5, définition du succès
+OUTIL      : Codex
+POURQUOI   : Rédiger une définition du succès métier cohérente avec le cas MAA et la capacité des quatre enquêteurs.
+DEMANDE    : Faire la question 5 du projet Mutuelle Alpine sur la branche docs/l0-e5-definition-succes déjà créée, en respectant AGENTS.md et CONTEXTE.md. Relance : Maxence confirme son identité et indique 1 min 4 s d’exécution et 2 min de revue de code. Nouvelle précision : durée d’exécution mesurée et durée de revue estimée ; suivi conservé séparément de la revue des consignes (entrée 003).
+RÉSULTAT   : Proposition rédigée dans docs/succes.md ; revue de code déclarée par Maxence ; décision d’acceptation non précisée.
+CE QUI A ÉTÉ REFUSÉ / CORRIGÉ : Aucune correction demandée à ce stade. La capacité et les seuils métier absents du contexte sont laissés à mesurer ou à définir, sans valeur présentée comme validée.
+VÉRIFICATION : Codex a relu README.md, AGENTS.md, CONTEXTE.md et l’exercice L0.5 du cahier de TP fourni (p. 3). Contrôle des dix lignes, de la prise en compte des quatre enquêteurs, des métriques métier et du diff. Aucun résultat métier mesuré n’est revendiqué. Maxence indique avoir consacré 2 min à la revue de code ; aucun détail de correction communiqué.
+TEMPS      : Temps d’exécution IA mesuré, communiqué par Maxence : 1 min 4 s. Temps de revue de code estimé par Maxence : 2 min. Durées conservées séparément. Gain ou perte de temps par rapport au travail sans IA : non communiqué.
 --------------------------------------------------------------------------------
