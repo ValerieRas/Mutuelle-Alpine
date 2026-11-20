@@ -1,7 +1,7 @@
 ================================================================================
 USAGE-IA.TXT — Journal de bord de l'utilisation de l'IA
-Projet : Chaîne data + IA de détection de fraude — MAA        Équipe : ________
-Membres : ____________________________________________
+Projet : Chaîne data + IA de détection de fraude — MAA        Équipe : MAA
+Membres : BADIN-LÉGER Maxence, RASOLOFOARISON Valérie et Hammadi Sabrina
 ================================================================================
 RÈGLES
 - Une entrée par usage significatif (pas chaque autocomplétion).
@@ -30,3 +30,15 @@ BILAN FINAL (obligatoire, 10-15 lignes)
 - Ce que vous ne délégueriez PAS à l'IA sur un projet réel, et pourquoi :
 - Part estimée du code généré par IA (%) et part relue/testée :
 ================================================================================
+#ID        : 001
+DATE       : 2026-11-20
+AUTEUR     : Sabrina
+LOT TP     : L0 — Exercice 4, architecture cible
+OUTIL      : Codex
+POURQUOI   : Comprendre le trajet d’une déclaration pour dessiner l’architecture cible.
+DEMANDE    : Expliquer le rôle de Kafka et de la couche bronze, puis créer le schéma dans docs/architecture.md.
+RÉSULTAT   : ACCEPTÉ APRÈS CORRECTION.
+CE QUI A ÉTÉ REFUSÉ / CORRIGÉ : Après relecture de l’exercice 4, j’ai demandé de réunir les deux diagrammes en un seul schéma et de garder les explications dans la conversation.
+VÉRIFICATION : Consigne relue dans le cahier de TP (p. 3). Le fichier docs/architecture.md contient un seul schéma présentant les flux, les couches, les outils et leurs utilisateurs.
+TEMPS      : Première réponse de Codex en 1 min 11 s. Temps gagné ou perdu par l’équipe : non estimé.
+--------------------------------------------------------------------------------
