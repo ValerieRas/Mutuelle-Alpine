@@ -1,0 +1,32 @@
+================================================================================
+USAGE-IA.TXT — Journal de bord de l'utilisation de l'IA
+Projet : Chaîne data + IA de détection de fraude — MAA        Équipe : ________
+Membres : ____________________________________________
+================================================================================
+RÈGLES
+- Une entrée par usage significatif (pas chaque autocomplétion).
+- Être honnête : un journal qui ne mentionne aucun refus ni aucune correction n'est pas crédible.
+- Ne JAMAIS coller de données personnelles (même fictives de bronze.assures) dans un outil d'IA externe.
+
+FORMAT D'UNE ENTRÉE (copier-coller)
+--------------------------------------------------------------------------------
+#ID        : 001
+DATE       : AAAA-MM-JJ
+AUTEUR     : prénom
+LOT TP     : L0..L9
+OUTIL      : (ex. Claude Code / Cursor / Copilot / Ollama qwen2.5-coder / ChatGPT ...)
+POURQUOI   : (tâche visée, pourquoi l'IA plutôt qu'à la main)
+DEMANDE    : (prompt résumé en 1-3 lignes)
+RÉSULTAT   : ACCEPTÉ | ACCEPTÉ APRÈS CORRECTION | REFUSÉ
+CE QUI A ÉTÉ REFUSÉ / CORRIGÉ :
+             (ce qui était faux, risqué ou inadapté ; comment vous l'avez détecté : test, doc, revue)
+VÉRIFICATION : (test dbt, pytest, lecture doc officielle, relecture binôme...)
+TEMPS      : estimé gagné / perdu
+--------------------------------------------------------------------------------
+
+BILAN FINAL (obligatoire, 10-15 lignes)
+- Où l'IA vous a fait gagner le plus de temps :
+- Où elle vous a induits en erreur :
+- Ce que vous ne délégueriez PAS à l'IA sur un projet réel, et pourquoi :
+- Part estimée du code généré par IA (%) et part relue/testée :
+================================================================================

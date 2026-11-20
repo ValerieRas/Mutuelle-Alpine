@@ -1,0 +1,7 @@
+maa:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: ../../warehouse/maa.duckdb
+      threads: 2
