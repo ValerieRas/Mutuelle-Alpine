@@ -103,3 +103,17 @@ VÉRIFICATION BATCH : Quatre tests passent dans tests/test_ingestion_referentiel
 JUSTIFICATION BATCH : Les sources disponibles sont des exports CSV. Une actualisation quotidienne peut suffire aux référentiels, hypothèse de fraîcheur à confirmer avec le métier. Le CDC exigerait une source transactionnelle et son journal de changements, ainsi que leur exploitation ; il serait à justifier par un besoin de fraîcheur plus strict. Aucun ordonnanceur quotidien ni CDC implémenté dans cette étape.
 TEMPS BATCH : Durée des quatre tests mesurée par pytest : 1,72 s ; commande de chargement suivie du rechargement mesurée par l’outil : environ 3,71 s. Durée totale de réponse IA non mesurée. Temps de relecture de Valérie et estimation du gain ou de la perte de temps restent non communiqués, à renseigner séparément.
 --------------------------------------------------------------------------------
+#ID        : 006
+DATE       : 2026-11-20
+AUTEUR     : Sabrina
+LOT TP     : L1 — Comprendre le flux de déclarations
+OUTIL      : Codex
+POURQUOI   : Relier le vocabulaire Kafka au parcours d’une déclaration dans le TP.
+DEMANDE    : Expliquer Kafka, topic, partition et message.
+RÉSULTAT   : Validation de Sabrina en attente.
+CE QUI A ÉTÉ REFUSÉ / CORRIGÉ : Aucun retour à ce stade.
+VÉRIFICATION : Codex a relu ingestion/producer.py et docker-compose.yml pour vérifier le topic par défaut, la clé id_sinistre et le nombre de partitions configuré par défaut.
+             Relance de Sabrina : expliquer source, partition et offset. Codex a vérifié les champs attendus dans le gabarit du consommateur L1 et illustré leur signification par une position fictive dans le topic.
+TEMPS      : Délai IA non chronométré. Relecture et estimation du temps gagné ou perdu en attente.
+--------------------------------------------------------------------------------
+ 
