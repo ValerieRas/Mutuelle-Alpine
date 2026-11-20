@@ -6,7 +6,7 @@ Projet de gouvernance et de modélisation des données. L’équipe construit un
 
 ## Reprendre le projet
 
-- [Contexte partagé](CONTEXTE.md) — lot en cours, décisions et prochaine question.
+- [Contexte partagé](CONTEXTE.md) — cas métier, données, attendus des lots et critères d’évaluation.
 - [Consignes pour les assistants IA](AGENTS.md) — format des livrables et tenue du journal.
 - [Journal des usages de l’IA](docs/USAGE-IA.TXT) — demandes, corrections et vérifications.
 - [Installation](docs/INSTALL.md) · [Cahier de TP du cours](https://github.com/Laudroid/Live_Gouvernance_modelisation/blob/main/03_TP_fil_rouge/03_cahier_TP_fil_rouge.pdf)

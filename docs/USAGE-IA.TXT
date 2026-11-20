@@ -53,5 +53,7 @@ DEMANDE    : Évaluer l’intérêt d’un contexte commun et de consignes pour 
 RÉSULTAT   : ACCEPTÉ APRÈS CORRECTION. Sabrina a retenu un README d’accueil, un contexte partagé et des consignes dédiées aux assistants.
 CE QUI A ÉTÉ REFUSÉ / CORRIGÉ : La proposition initiale plaçait le contexte dans le README. Sabrina a demandé un fichier de contexte distinct et une mise à jour du journal à chaque appel, avec une question au membre si une information manque.
 VÉRIFICATION : Codex a contrôlé les liens locaux du README, les consignes de journalisation et la présence de tous les champs de l’entrée 002.
+             Relance de Sabrina : retrouver les différences dans VS Code. Codex a comparé main au commit ab8be14, vérifié les quatre fichiers et ouvert le comparatif.
+             Correction demandée par Sabrina : couvrir le projet entier dans CONTEXTE.md et AGENTS.md. Codex a repris les lots L0 à L9, les livrables et les critères du cahier de TP et de la grille. Relecture de cette version par Sabrina en attente.
 TEMPS      : Pour la demande initiale, délai de réponse de l’IA indiqué par Sabrina : 23 s. Temps d’analyse estimé par Sabrina : 3 min. Sabrina ne peut pas estimer le temps gagné ou perdu.
 --------------------------------------------------------------------------------

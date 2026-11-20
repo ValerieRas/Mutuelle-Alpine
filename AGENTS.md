@@ -1,12 +1,21 @@
-# Consignes pour les assistants IA du projet MAA
+# Accompagner l’équipe MAA sur le projet de gouvernance data
 
-## Avant de répondre
+L’équipe construit un système d’aide à la revue des sinistres auto et habitation. Ses quatre enquêteurs doivent pouvoir utiliser et comprendre les scores. Aider les trois membres à produire une chaîne reproductible, à justifier leurs choix et à expliquer leur travail en soutenance.
 
-Lire le [contexte partagé](CONTEXTE.md), la consigne du lot concerné et les dernières entrées du [journal](docs/USAGE-IA.TXT). S’appuyer sur les fichiers du dépôt et distinguer ce qui est prévu de ce qui a été réalisé.
+## Trouver rapidement le bon contexte
 
-## Livrable et accompagnement
+1. Lire le [contexte du projet](CONTEXTE.md). Son tableau L0 à L9 indique le dossier à ouvrir selon la question. Identifier le lot d’après la demande du membre. Une nouvelle conversation peut porter sur n’importe quel lot.
+2. Pour une question de consigne, lire l’exercice exact dans le cahier de TP lié au contexte. Pour une question de notation, lire le critère correspondant dans la grille. Préciser le format, la quantité ou le seuil quand ils sont imposés.
+3. Pour une question sur l’avancement, inspecter la branche active, le fichier concerné et ses résultats disponibles. Un gabarit, un schéma cible ou une valeur attendue du kit ne prouve pas que le traitement a réussi. Pour les décisions antérieures de l’équipe, consulter le dépôt et les entrées pertinentes du journal.
+4. Répondre en français et au niveau de la demande. Pour une question de cours, expliquer dans la conversation avec un exemple du cas MAA. Pour un livrable, respecter la consigne et le format attendus. Pour une vérification, indiquer le contrôle réalisé, le résultat observé et ce qui reste à valider.
 
-Respecter le format et le périmètre demandés dans le cahier de TP. Donner les explications pédagogiques dans la conversation. Préserver les contributions des autres membres. Les données des tables `bronze.assures` et `bronze.enquetes`, même fictives, doivent rester sur la machine lors d’un usage d’IA.
+## Points à vérifier selon le sujet
+
+- **Ingestion et qualité.** Distinguer l’événement reçu du sinistre métier. Vérifier la provenance et le rejeu en bronze, puis le grain, les doublons et les motifs de rejet en silver et gold.
+- **Modèle et décision métier.** Un dossier sans enquête a un label inconnu. Vérifier la disponibilité des variables à la date du score. Relier le seuil au volume de revues et à la capacité humaine. Attribuer la décision d’indemnisation à un humain.
+- **Gouvernance et confidentialité.** Préserver la traçabilité du score et les droits d’accès. Garder hors des IA distantes les données de `bronze.assures` et `bronze.enquetes`, même synthétiques. Préférer les schémas, agrégats ou exemples construits pour expliquer un problème. Réserver les attributs d’audit à l’étude de l’équité.
+- **Assistant documentaire.** Vérifier les droits lors de la recherche des passages et l’appui de chaque réponse sur une source autorisée. En l’absence de passage pertinent, prévoir l’abstention.
+- **Travail à trois.** Distinguer une exigence du cours, une proposition et une décision prise par l’équipe. Conserver les contributions existantes. Documenter une décision partagée avec sa justification pour qu’un autre membre puisse la reprendre.
 
 ## Journal obligatoire à chaque appel à une IA
 
