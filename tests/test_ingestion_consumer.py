@@ -100,7 +100,8 @@ def test_full_file_cli_and_replay(tmp_path):
         assert connection.execute('SELECT * FROM bronze.sinistres_events ORDER BY "offset"').fetchall() == original
 
 
-def test_ctrl_c_finishes_current_batch_and_closes_resources(tmp_path, monkeypatch):
+@pytest.mark.parametrize("signum", [signal.SIGINT, signal.SIGTERM])
+def test_signal_finishes_current_batch_and_closes_resources(tmp_path, monkeypatch, signum):
     import confluent_kafka
 
     closed = []
@@ -114,7 +115,7 @@ def test_ctrl_c_finishes_current_batch_and_closes_resources(tmp_path, monkeypatc
         def subscribe(self, topics): pass
 
         def consume(self, **kwargs):
-            signal.raise_signal(signal.SIGINT)
+            signal.raise_signal(signum)
             return [Message(0)]
 
         def commit(self, **kwargs):
@@ -130,3 +131,70 @@ def test_ctrl_c_finishes_current_batch_and_closes_resources(tmp_path, monkeypatc
     assert len(committed) == 1
     with duckdb.connect(str(database), read_only=True) as connection:
         assert connection.execute("SELECT count(*) FROM bronze.sinistres_events").fetchone()[0] == 1
+
+
+def test_partial_commit_can_replay_only_the_refused_partition():
+    with duckdb.connect(":memory:") as connection:
+        ingestion.initialize(connection)
+        messages = [Message(0, 0), Message(0, 1)]
+        replies = [SimpleNamespace(error=None), SimpleNamespace(error="partition refusée")]
+        consumer = SimpleNamespace(commit=lambda **kwargs: replies)
+        with pytest.raises(RuntimeError, match="partition refusée"):
+            ingestion.write_kafka_batch(connection, consumer, messages)
+        query = 'SELECT * FROM bronze.sinistres_events ORDER BY "partition"'
+        before = connection.execute(query).fetchall()
+        assert len(before) == 2
+
+        confirmed = []
+
+        def commit(offsets, asynchronous):
+            assert asynchronous is False
+            confirmed.extend((p.partition, p.offset) for p in offsets)
+            return [SimpleNamespace(error=None)]
+
+        ingestion.write_kafka_batch(connection, SimpleNamespace(commit=commit), messages[1:])
+        assert confirmed == [(1, 1)]
+        assert connection.execute(query).fetchall() == before
+
+
+@pytest.mark.parametrize("end", ["reassigned", "timeout", "signal"])
+def test_assignment_loss_after_long_running_session(monkeypatch, end):
+    import confluent_kafka
+
+    stop = Event()
+    now = 0
+    closed = []
+    # Attribution au début, puis perte temporaire ou prolongée après 60 s.
+    polls = iter([(1, True), (60, False), (61, True), (64, True)]
+                 if end == "reassigned" else [(1, True), (60, False), (91, False)])
+
+    class Consumer:
+        def __init__(self, config):
+            self.assigned = False
+
+        def subscribe(self, topics):
+            pass
+
+        def consume(self, **kwargs):
+            nonlocal now
+            now, self.assigned = next(polls)
+            if now == 91 and end == "signal":
+                stop.set()
+            return []
+
+        def assignment(self):
+            return [0] if self.assigned else []
+
+        def close(self):
+            closed.append(True)
+
+    monkeypatch.setattr(confluent_kafka, "Consumer", Consumer)
+    monkeypatch.setattr(ingestion, "time", SimpleNamespace(monotonic=lambda: now))
+    args = ingestion.parse_args(["--idle-timeout", "1.5"])
+    if end == "timeout":
+        with pytest.raises(RuntimeError, match="Aucune partition"):
+            ingestion.consume_kafka(None, args, stop)
+    else:
+        assert ingestion.consume_kafka(None, args, stop) == 0
+    assert now == (64 if end == "reassigned" else 91)
+    assert closed == [True]
