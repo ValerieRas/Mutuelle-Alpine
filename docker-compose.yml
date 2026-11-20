@@ -1,0 +1,106 @@
+# MAA — chaîne data + IA. Profils pour s'adapter à la RAM disponible :
+#   docker compose up -d                       -> socle (~1,7 Go) : Apache Kafka (KRaft), API, Prometheus, Pushgateway, Grafana
+#   docker compose --profile lineage up -d     -> + Marquez (OpenLineage)            (~ +700 Mo)
+#   docker compose --profile ml up -d          -> + serveur MLflow                   (~ +300 Mo)
+#   docker compose --profile rag up -d         -> + Qdrant serveur (sinon mode local embarqué) (~ +200 Mo)
+#   docker compose --profile ui up -d          -> + Kafka UI (kafbat, Apache 2.0)
+# Alternative plus légère au broker : profil "redpanda" (⚠️ licence BSL, non OSI) -> arrêter "kafka" avant.
+# Ollama (LLM) tourne sur l'hôte : https://ollama.com  (qwen2.5:1.5b ~1 Go RAM, licence Apache 2.0)
+# OpenMetadata et Langfuse v3 sont trop lourds pour 8 Go : démo formateur (voir docs/INSTALL.md).
+name: maa-fraude
+services:
+  kafka:
+    image: apache/kafka:3.9.0
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_LISTENERS: INTERNAL://:9092,EXTERNAL://:19092,CONTROLLER://:9093
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka:9092,EXTERNAL://localhost:19092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT,CONTROLLER:PLAINTEXT
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@localhost:9093
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_NUM_PARTITIONS: 3
+      KAFKA_HEAP_OPTS: "-Xmx512m -Xms512m"
+    ports: ["19092:19092"]
+
+  kafka-ui:
+    profiles: [ui]
+    image: ghcr.io/kafbat/kafka-ui:v1.0.0
+    environment: {KAFKA_CLUSTERS_0_NAME: maa, KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: "kafka:9092"}
+    ports: ["8080:8080"]
+    depends_on: [kafka]
+
+  redpanda:
+    profiles: [redpanda]
+    image: docker.redpanda.com/redpandadata/redpanda:v24.2.7
+    command: >
+      redpanda start --mode dev-container --smp 1 --memory 512M --overprovisioned
+      --kafka-addr internal://0.0.0.0:9092,external://0.0.0.0:19092
+      --advertise-kafka-addr internal://redpanda:9092,external://localhost:19092
+    ports: ["19092:19092"]
+
+  api:
+    build: {context: ., dockerfile: api/Dockerfile}
+    environment: {MODEL_VERSION: "${MODEL_VERSION:-v1}"}
+    volumes: ["./monitoring:/data"]
+    ports: ["8000:8000"]
+    deploy: {resources: {limits: {memory: 512M}}}
+
+  prometheus:
+    image: prom/prometheus:v2.54.1
+    volumes: ["./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro", "./monitoring/alerts.yml:/etc/prometheus/alerts.yml:ro"]
+    ports: ["9090:9090"]
+
+  pushgateway:
+    image: prom/pushgateway:v1.9.0
+    ports: ["9091:9091"]
+
+  grafana:
+    image: grafana/grafana-oss:11.2.0
+    environment: {GF_SECURITY_ADMIN_PASSWORD: "maa-admin", GF_AUTH_ANONYMOUS_ENABLED: "true"}
+    volumes: ["./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro"]
+    ports: ["3001:3000"]
+    depends_on: [prometheus]
+
+  mlflow:
+    profiles: [ml]
+    image: ghcr.io/mlflow/mlflow:v3.1.4
+    command: mlflow server --host 0.0.0.0 --port 5000 --backend-store-uri sqlite:////mlflow/mlflow.db --artifacts-destination /mlflow/artifacts
+    volumes: ["./mlflow_data:/mlflow"]
+    ports: ["5000:5000"]
+
+  qdrant:
+    profiles: [rag]
+    image: qdrant/qdrant:v1.11.3
+    ports: ["6333:6333"]
+    volumes: ["./qdrant_server:/qdrant/storage"]
+
+  marquez-db:
+    profiles: [lineage]
+    image: postgres:14
+    environment: {POSTGRES_USER: marquez, POSTGRES_PASSWORD: marquez, POSTGRES_DB: marquez}
+
+  marquez:
+    profiles: [lineage]
+    image: marquezproject/marquez:0.49.0
+    environment:
+      MARQUEZ_PORT: 5000
+      MARQUEZ_ADMIN_PORT: 5001
+      POSTGRES_HOST: marquez-db
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: marquez
+      POSTGRES_USER: marquez
+      POSTGRES_PASSWORD: marquez
+    ports: ["5002:5000"]
+    depends_on: [marquez-db]
+
+  marquez-web:
+    profiles: [lineage]
+    image: marquezproject/marquez-web:0.49.0
+    environment: {MARQUEZ_HOST: marquez, MARQUEZ_PORT: 5000, WEB_PORT: 3000}
+    ports: ["3002:3000"]
+    depends_on: [marquez]

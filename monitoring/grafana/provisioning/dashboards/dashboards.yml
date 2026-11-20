@@ -1,0 +1,3 @@
+apiVersion: 1
+providers:
+  - {name: maa, folder: MAA, type: file, options: {path: /etc/grafana/provisioning/dashboards}}

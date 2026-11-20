@@ -1,0 +1,14 @@
+.venv/
+warehouse/
+qdrant_data/
+qdrant_server/
+mlruns/
+mlflow_data/
+mlartifacts/
+ml/artifacts/
+monitoring/predictions.jsonl
+data/raw/_FORMATEUR_*
+dbt/maa/target/
+dbt/maa/logs/
+.env
+__pycache__/

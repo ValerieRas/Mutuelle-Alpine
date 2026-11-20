@@ -1,0 +1,23 @@
+name: maa
+version: "1.0.0"
+config-version: 2
+profile: maa
+model-paths: ["models"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
+vars:
+  # Sel de pseudonymisation : en production, injecté via variable d'environnement / coffre-fort, JAMAIS commité.
+  pseudo_salt: "{{ env_var('MAA_PSEUDO_SALT', 'sel-de-dev-a-changer') }}"
+  date_reference: "2026-01-01"
+models:
+  maa:
+    +persist_docs: {relation: true, columns: true}
+    staging:
+      +schema: silver
+      +materialized: view
+    marts:
+      +schema: gold
+      +materialized: table
+    features:
+      +schema: ml
+      +materialized: table

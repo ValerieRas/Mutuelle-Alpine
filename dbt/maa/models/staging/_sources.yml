@@ -1,0 +1,18 @@
+version: 2
+sources:
+  - name: bronze
+    schema: bronze
+    description: "Couche brute append-only (Kafka + batch). Aucune transformation métier."
+    tables:
+      - name: sinistres_events
+        description: "Déclarations de sinistres reçues sur le topic maa.sinistres.declares.v1 (JSON brut)."
+        meta: {owner: "Direction Indemnisation", steward: "steward.sinistres@maa", sensibilite: "C3 - confidentiel"}
+        loaded_at_field: ingested_at
+      - name: assures
+        meta: {owner: "Direction Clients", sensibilite: "C4 - données personnelles directes"}
+      - name: contrats
+        meta: {owner: "Direction Produits", sensibilite: "C2 - interne"}
+      - name: prestataires
+        meta: {owner: "Direction Achats", sensibilite: "C2 - interne"}
+      - name: enquetes
+        meta: {owner: "Cellule Anti-Fraude", sensibilite: "C4 - données relatives à des soupçons d'infraction"}
